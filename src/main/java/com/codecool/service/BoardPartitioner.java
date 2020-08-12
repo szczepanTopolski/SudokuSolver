@@ -33,5 +33,15 @@ public  class BoardPartitioner {
         return row;
     }
 
-
+    public static Cell[] getBox(Board board, int id){
+        List<Cell> box = new ArrayList<Cell>();
+        int xOffset = 3 * (id % 3 );
+        int yOffset = 3 * (id / 3);
+        for (int y = 0; y < 3; y++) {
+            for (int x = 0; x < 3; x++) {
+                box.add(getCell(board,x + xOffset, y + yOffset));
+            }
+        }
+        return (Cell[]) box.toArray();
+    }
 }
