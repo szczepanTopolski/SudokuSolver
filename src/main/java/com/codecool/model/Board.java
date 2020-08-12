@@ -1,7 +1,5 @@
 package com.codecool.model;
 
-import com.codecool.model.controller.Cell;
-
 public class Board {
     private final Cell[] cells;
 
