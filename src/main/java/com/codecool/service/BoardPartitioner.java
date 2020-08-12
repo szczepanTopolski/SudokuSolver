@@ -17,18 +17,18 @@ public  class BoardPartitioner {
         return board.getCells()[y * WIDTH + x];
     }
 
-    public static Cell[] getColumn(Board board, int index){
+    public static Cell[] getColumn(Board board, int x){
         Cell[] column = new Cell[9];
-        for (int i = 0; i <HEIGHT; i++) {
-            column[i] = getCell(board, index, i);;
+        for (int y = 0; y <HEIGHT; y++) {
+            column[y] = getCell(board, x, y);;
         }
         return column;
     }
 
-    public static Cell[] getRow(Board board, int index){
+    public static Cell[] getRow(Board board, int y){
         Cell[] row = new Cell[9];
-        for (int i = 0; i <WIDTH; i++) {
-            row[i] = getCell(board, index, i);
+        for (int x = 0; x <WIDTH; x++) {
+            row[x] = getCell(board, x, y);
         }
         return row;
     }
@@ -42,6 +42,6 @@ public  class BoardPartitioner {
                 box.add(getCell(board,x + xOffset, y + yOffset));
             }
         }
-        return (Cell[]) box.toArray();
+        return box.toArray(new Cell[0]);
     }
 }
