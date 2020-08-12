@@ -1,4 +1,4 @@
-package main.java.com.codecool.service;
+package main.java.com.codecool.exception;
 
 public class InvalidSudokuException extends Exception {
 
