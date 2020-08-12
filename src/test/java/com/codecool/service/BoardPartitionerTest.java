@@ -21,6 +21,33 @@ class BoardPartitionerTest {
 
         assertArrayEquals(expectedCellsValues, actualCellsValues);
     }
+    @Test
+    @DisplayName("get row")
+    void getRow(){
+        Board testBoard = createCellBoard();
+        int[] expectedCellsValues = {10,11,12,13,14,15,16,17,18};
+        Cell[] actualCells = BoardPartitioner.getRow(testBoard, 0);
+        int[] actualCellsValues = new int[9];
+        for (int i = 0; i <actualCells.length; i++) {
+            actualCellsValues[i] = actualCells[i].getValue();
+        }
+
+        assertArrayEquals(expectedCellsValues, actualCellsValues);
+    }
+    @Test
+    @DisplayName("get box")
+    void getBox(){
+        Board testBoard = createCellBoard();
+        int[] expectedCellsValues = {10,11,12,19,20,21,28,29,30};
+        Cell[] actualCells = BoardPartitioner.getBox(testBoard, 0);
+        int[] actualCellsValues = new int[9];
+        for (int i = 0; i <actualCells.length; i++) {
+            actualCellsValues[i] = actualCells[i].getValue();
+        }
+
+        assertArrayEquals(expectedCellsValues, actualCellsValues);
+    }
+
 
     private Board createCellBoard(){
         Cell[] cells = new Cell[81];
