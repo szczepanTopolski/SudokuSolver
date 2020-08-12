@@ -1,4 +1,4 @@
-package com.codecool.model.controller;
+package com.codecool.model;
 
 import java.util.HashSet;
 import java.util.Set;
