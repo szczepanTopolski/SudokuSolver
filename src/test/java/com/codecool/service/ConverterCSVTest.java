@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ConverterCSVTest {
     private final Converter converter;
@@ -15,35 +14,32 @@ class ConverterCSVTest {
         this.converter = new ConverterCSV();
     }
 
-    @Test
-    public void shouldRaiseInvalidArgumentExceptionWhenEmptyStringPassed() {
-        assertThrows(IllegalArgumentException.class, ()->converter.convert(null));
-    }
-    
-    @Test
-    public void shouldRaiseInvalidArgumentExceptionWhenTooShortRowPassed() {
-        assertThrows(IllegalArgumentException.class, ()->converter.convert("0;1;2;3;4;5;6;7;"));
-    }
-    @Test
-    public void shouldRaiseInvalidArgumentExceptionWhenNotTooShortColsPassed() {
-        assertThrows(IllegalArgumentException.class, ()->converter.convert("0;0;0;0;0;0;0;0;0;\n0;0;0;0;0;0;0;0;0;\n"));
-    }
-    @Test
-    public void shouldRaiseInvalidArgumentExceptionWhenNotOnlyDigitsRowPassed() {
-        assertThrows(IllegalArgumentException.class, ()->converter.convert("0;1;L;3;D;5;X;7;D;"));
-    }
 
     @Test
-    public void shouldReturnBoardWhenProperStringPassed() {
+    public void shouldReturnFullFilledBoardWhenProperStringPassed() {
         // Arrange
-        String input =   "0;0;0;0;0;0;0;0;0;\n0;0;0;0;0;0;0;0;0;\n0;0;0;0;0;0;0;0;0;\n" +
-                "0;0;0;0;0;0;0;0;0;\n0;0;0;0;0;0;0;0;0;\n0;0;0;0;0;0;0;0;0;\n" +
-                "0;0;0;0;0;0;0;0;0;\n0;0;0;0;0;0;0;0;0;\n0;0;0;0;0;0;0;0;0;\n";
+        String[][] values = getValues();
         // Act
-        Board board = converter.convert(input);
+        Board board = converter.convert(values);
         // Assert
-        assertTrue(Arrays.stream(board.getCells()).allMatch(cell -> cell.getValue() == 0)
-        && board.getCells().length == 81);
-    } 
+        assertEquals(81, board.getCells().length);
+    }
 
+    @Test
+    public void shouldReturnBoardFullFilledWithValuesWhenProperStringPassed() {
+        // Arrange
+        String[][] values = getValues();
+        // Act
+        Board board = converter.convert(values);
+        // Assert
+        assertTrue(Arrays.stream(board.getCells()).allMatch(cell -> cell.getValue() == 0));
+    }
+
+    private String[][] getValues() {
+        return new String[][]{{"0", "0", "0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0", "0", "0"},
+                {"0", "0", "0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0", "0", "0"}
+                , {"0", "0", "0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0", "0", "0"}
+                , {"0", "0", "0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0", "0", "0"},
+                {"0", "0", "0", "0", "0", "0", "0", "0", "0"}};
+    }
 }
