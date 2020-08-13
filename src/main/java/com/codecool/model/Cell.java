@@ -4,16 +4,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Cell {
+    private final int id;
     private final int x;
     private final int y;
     private int value;
-    private final Set<Integer> possibilities;
+    private Set<Integer> possibilities;
 
-    public Cell(int x, int y, int value) {
+    public Cell(int id, int x, int y, int value) {
+        this.id = id;
         this.x = x;
         this.y = y;
         this.value = value;
-        this.possibilities = new HashSet<>();
+    }
+
+    public int getId() {
+        return id;
     }
 
     public int getValue() {
@@ -30,6 +35,14 @@ public class Cell {
 
     public int getY() {
         return y;
+    }
+
+    public Set<Integer> getPossibilities() {
+        return possibilities;
+    }
+
+    public void setPossibilities(Set<Integer> possibilities) {
+        this.possibilities = possibilities;
     }
 
     public void addPossibility(int value){
