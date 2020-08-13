@@ -9,9 +9,10 @@ public class Cell {
     private int value;
     private final Set<Integer> possibilities;
 
-    public Cell(int x, int y) {
+    public Cell(int x, int y, int value) {
         this.x = x;
         this.y = y;
+        this.value = value;
         this.possibilities = new HashSet<>();
     }
 
