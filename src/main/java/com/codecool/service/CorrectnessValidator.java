@@ -36,7 +36,16 @@ public class CorrectnessValidator {
 
     }
     private void validateCols() throws InvalidSudokuException {
-
+        for (int i = 0; i < 9; i ++) {
+            List<Cell> cells = Arrays.asList(getColumn(board, i));
+            List<Integer> cellValues = new ArrayList<>();
+            cells.forEach(cell -> cellValues.add(cell.getValue()));
+            Set<Integer> testSet = new HashSet<>(cellValues);
+            if(testSet.size() < cellValues.size()){
+                String message = "duplicates found in row" + i;
+                throw new InvalidSudokuException(message);
+            }
+        }
     }
 
     private void validateBoxes() throws InvalidSudokuException {
