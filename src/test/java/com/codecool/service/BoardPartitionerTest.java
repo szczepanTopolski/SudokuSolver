@@ -53,7 +53,7 @@ class BoardPartitionerTest {
         Cell[] cells = new Cell[81];
 
         for (int i = 0; i < 81 ; i++) {
-            cells[i] = new Cell(i,i, i+10);
+            cells[i] = new Cell(i, i,i, i+10);
         }
         return new Board(cells) ;
     }
