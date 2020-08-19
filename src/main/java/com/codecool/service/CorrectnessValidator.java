@@ -10,7 +10,7 @@ import static com.codecool.service.BoardPartitioner.*;
 
 
 public class CorrectnessValidator {
-    Board board;
+    private final Board board;
 
     public CorrectnessValidator(Board board) {
         this.board = board;
@@ -23,7 +23,7 @@ public class CorrectnessValidator {
     }
 
     private void validateRows() throws InvalidSudokuException {
-        for (int i = 0; i < 81; i += 9) {
+        for (int i = 0; i <9; i ++) {
             List<Cell> cells = Arrays.asList(getRow(board, i));
             List<Integer> cellValues = new ArrayList<>();
             cells.forEach(cell -> cellValues.add(cell.getValue()));
@@ -49,6 +49,15 @@ public class CorrectnessValidator {
     }
 
     private void validateBoxes() throws InvalidSudokuException {
-
+        for (int i = 0; i < 9; i ++) {
+            List<Cell> cells = Arrays.asList(getBox(board, i));
+            List<Integer> cellValues = new ArrayList<>();
+            cells.forEach(cell -> cellValues.add(cell.getValue()));
+            Set<Integer> testSet = new HashSet<>(cellValues);
+            if(testSet.size() < cellValues.size()){
+                String message = "duplicates found in column" + i;
+                throw new InvalidSudokuException(message);
+            }
+        }
     }
 }
