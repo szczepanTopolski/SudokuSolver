@@ -6,12 +6,13 @@ import com.codecool.model.Cell;
 import java.util.Arrays;
 import java.util.function.BiFunction;
 
+import static com.codecool.service.CompletenessValidator.*;
+
 public class Solver {
     private final Board board;
     private final PossibilitiesValidator validator;
     private boolean isCyclePossible;
 
-    // TODO Completeness Validators injection
     public Solver(Board board, PossibilitiesValidator validator) {
         this.board = board;
         this.validator = validator;
@@ -27,7 +28,15 @@ public class Solver {
             solve(BoardPartitioner::getRow);
         }
 
-        return false; // TODO completenessValidator.isSolved();
+        return isSolved();
+    }
+
+    private boolean isSolved() {
+        return isFullFilledWithValues()
+                .and(areBoxesValid())
+                .and(areColsValid())
+                .and(areRowsValid())
+                .apply(board);
     }
 
 
