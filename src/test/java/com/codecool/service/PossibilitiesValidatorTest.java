@@ -40,7 +40,7 @@ class PossibilitiesValidatorTest {
     @Test
     public void shouldRemovePossibilitiesFromCellWhenItsValuesFound() {
         // Arrange
-        Board board = testUtills.getBoard();
+        Board board = testUtills.getBoard(false);
         Cell cellToValidate = board.getCells()[1];
         // Act
         possibilitiesValidator.validatePossibilities(board, cellToValidate);
