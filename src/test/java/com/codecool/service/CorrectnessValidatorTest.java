@@ -25,8 +25,8 @@ public class CorrectnessValidatorTest {
     @Test
     @DisplayName("Test board for row duplicates")
     public void testRowValidator(){
-        boardStub.getCells()[0].setValue(DUPLICATE_TEST_VALUE);
-        boardStub.getCells()[4].setValue(DUPLICATE_TEST_VALUE);
+        boardStub.getCells()[9].setValue(DUPLICATE_TEST_VALUE);
+        boardStub.getCells()[14].setValue(DUPLICATE_TEST_VALUE);
         CorrectnessValidator correctnessValidator = new CorrectnessValidator(boardStub);
         Assertions.assertThrows(InvalidSudokuException.class, correctnessValidator::validate);
     }
@@ -36,6 +36,15 @@ public class CorrectnessValidatorTest {
     public void testColValidator(){
         boardStub.getCells()[7].setValue(DUPLICATE_TEST_VALUE);
         boardStub.getCells()[16].setValue(DUPLICATE_TEST_VALUE);
+        CorrectnessValidator correctnessValidator = new CorrectnessValidator(boardStub);
+        Assertions.assertThrows(InvalidSudokuException.class, correctnessValidator::validate);
+    }
+
+    @Test
+    @DisplayName("Test board for box duplicates")
+    public void testBoxValidator(){
+        boardStub.getCells()[3].setValue(DUPLICATE_TEST_VALUE);
+        boardStub.getCells()[23].setValue(DUPLICATE_TEST_VALUE);
         CorrectnessValidator correctnessValidator = new CorrectnessValidator(boardStub);
         Assertions.assertThrows(InvalidSudokuException.class, correctnessValidator::validate);
     }
