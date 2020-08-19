@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import static com.codecool.service.TestUtills.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -40,7 +41,7 @@ class PossibilitiesValidatorTest {
     @Test
     public void shouldRemovePossibilitiesFromCellWhenItsValuesFound() {
         // Arrange
-        Board board = testUtills.getBoard(false);
+        Board board = testUtills.getBoard(State.VALID);
         Cell cellToValidate = board.getCells()[1];
         // Act
         possibilitiesValidator.validatePossibilities(board, cellToValidate);
