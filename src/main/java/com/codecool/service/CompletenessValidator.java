@@ -5,9 +5,7 @@ import com.codecool.model.Cell;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static com.codecool.service.BoardPartitioner.*;
@@ -22,35 +20,23 @@ public interface CompletenessValidator extends Function<Board, Boolean> {
 
     static CompletenessValidator areBoxesValid(){
         return board -> IntStream.range(0, 8)
-                .allMatch(id -> {
-                    List<Integer> values = Arrays.stream(getBox(board, id))
-                            .map(Cell::getValue)
-                            .collect(Collectors.toList());
-                    return values.stream()
-                            .allMatch(new HashSet<Integer>()::add);
-                });
+                .allMatch(id -> Arrays.stream(getBox(board, id))
+                        .map(Cell::getValue)
+                        .allMatch(new HashSet<Integer>()::add));
     }
 
     static CompletenessValidator areColsValid(){
         return board -> IntStream.range(0, 8)
-                .allMatch(id -> {
-                    List<Integer> values = Arrays.stream(getColumn(board, id))
-                            .map(Cell::getValue)
-                            .collect(Collectors.toList());
-                    return values.stream()
-                            .allMatch(new HashSet<Integer>()::add);
-                });
+                .allMatch(id -> Arrays.stream(getColumn(board, id))
+                        .map(Cell::getValue)
+                        .allMatch(new HashSet<Integer>()::add));
     }
 
     static CompletenessValidator areRowsValid(){
         return board -> IntStream.range(0, 8)
-                .allMatch(id -> {
-                    List<Integer> values = Arrays.stream(getRow(board, id))
-                            .map(Cell::getValue)
-                            .collect(Collectors.toList());
-                    return values.stream()
-                            .allMatch(new HashSet<Integer>()::add);
-                });
+                .allMatch(id -> Arrays.stream(getRow(board, id))
+                        .map(Cell::getValue)
+                        .allMatch(new HashSet<Integer>()::add));
     }
 
     default CompletenessValidator and (CompletenessValidator other){
