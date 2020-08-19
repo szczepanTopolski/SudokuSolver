@@ -6,20 +6,18 @@ import com.codecool.model.Cell;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.codecool.service.Properties.*;
+
 
 public  class BoardPartitioner {
-    private static final int WIDTH = 9;
-    private static final int HEIGHT = 9;
-
-
 
     public static Cell getCell(Board board, int x, int y) {
-        return board.getCells()[y * WIDTH + x];
+        return board.getCells()[y * MAX_WIDTH.getValue() + x];
     }
 
     public static Cell[] getColumn(Board board, int x){
         Cell[] column = new Cell[9];
-        for (int y = 0; y <HEIGHT; y++) {
+        for (int y = 0; y < MAX_HEIGHT.getValue(); y++) {
             column[y] = getCell(board, x, y);;
         }
         return column;
@@ -27,7 +25,7 @@ public  class BoardPartitioner {
 
     public static Cell[] getRow(Board board, int y){
         Cell[] row = new Cell[9];
-        for (int x = 0; x <WIDTH; x++) {
+        for (int x = 0; x < MAX_WIDTH.getValue(); x++) {
             row[x] = getCell(board, x, y);
         }
         return row;
