@@ -12,7 +12,7 @@ class BoardPartitionerTest {
     @DisplayName("get column")
     void getColumn() {
         Board testBoard = createCellBoard();
-        int[] expectedCellsValues = {10,19,28,37,46,55,64,73,82};
+        int[] expectedCellsValues = {0,9,18,27,36,45,54,63,72};
         Cell[] actualCells = BoardPartitioner.getColumn(testBoard, 0);
         int[] actualCellsValues = new int[9];
         for (int i = 0; i <actualCells.length; i++) {
@@ -25,7 +25,7 @@ class BoardPartitionerTest {
     @DisplayName("get row")
     void getRow(){
         Board testBoard = createCellBoard();
-        int[] expectedCellsValues = {10,11,12,13,14,15,16,17,18};
+        int[] expectedCellsValues = {0,1,2,3,4,5,6,7,8};
         Cell[] actualCells = BoardPartitioner.getRow(testBoard, 0);
         int[] actualCellsValues = new int[9];
         for (int i = 0; i <actualCells.length; i++) {
@@ -38,8 +38,22 @@ class BoardPartitionerTest {
     @DisplayName("get box")
     void getBox(){
         Board testBoard = createCellBoard();
-        int[] expectedCellsValues = {10,11,12,19,20,21,28,29,30};
+        int[] expectedCellsValues = {0,1,2,9,10,11,18,19,20};
         Cell[] actualCells = BoardPartitioner.getBox(testBoard, 0);
+        int[] actualCellsValues = new int[9];
+        for (int i = 0; i <actualCells.length; i++) {
+            actualCellsValues[i] = actualCells[i].getValue();
+        }
+
+        assertArrayEquals(expectedCellsValues, actualCellsValues);
+    }
+
+    @Test
+    @DisplayName("get box In the middle")
+    void getMidBoxBox(){
+        Board testBoard = createCellBoard();
+        int[] expectedCellsValues = {3,4,5,12,13,14,21,22,23};
+        Cell[] actualCells = BoardPartitioner.getBox(testBoard, 3);
         int[] actualCellsValues = new int[9];
         for (int i = 0; i <actualCells.length; i++) {
             actualCellsValues[i] = actualCells[i].getValue();
@@ -53,7 +67,7 @@ class BoardPartitionerTest {
         Cell[] cells = new Cell[81];
 
         for (int i = 0; i < 81 ; i++) {
-            cells[i] = new Cell(i, i,i, i+10);
+            cells[i] = new Cell(i, i,i, i);
         }
         return new Board(cells) ;
     }
