@@ -14,7 +14,7 @@ public class TestUtills {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 int id = i + j * 9;
-                cells[id] = new Cell(id, j, i , values[j][i]);
+                cells[id] = new Cell(id, i, j , values[j][i]);
                 fillWithPossibilitiesWhenHasNoValue(cells[id]);
             }
         }
@@ -22,15 +22,15 @@ public class TestUtills {
     }
 
     private int[][] getValues() {
-        return new int[][]{{3, 0, 6, 5, 0, 8, 4, 0, 0},
-                {5, 2, 0, 0, 0, 0, 0, 0, 0},
-                {0, 8, 7, 0, 0, 0, 0, 3, 1},
-                {0, 0, 3, 0, 1, 0, 0, 8, 0},
-                {9, 0, 0, 8, 6, 3, 0, 0, 5},
-                {0, 5, 0, 0, 9, 0, 6, 0, 0},
-                {1, 3, 0, 0, 0, 0, 2, 5, 0},
-                {0, 0, 0, 0, 0, 0, 0, 7, 4},
-                {0, 0, 5, 2, 0, 6, 3, 0, 0}};
+        return new int[][]{ {3, 0, 6, 5, 0, 8, 4, 0, 0},
+                            {5, 2, 0, 0, 0, 0, 0, 0, 0},
+                            {0, 8, 7, 0, 0, 0, 0, 3, 1},
+                            {0, 0, 3, 0, 1, 0, 0, 8, 0},
+                            {9, 0, 0, 8, 6, 3, 0, 0, 5},
+                            {0, 5, 0, 0, 9, 0, 6, 0, 0},
+                            {1, 3, 0, 0, 0, 0, 2, 5, 0},
+                            {0, 0, 0, 0, 0, 0, 0, 7, 4},
+                            {0, 0, 5, 2, 0, 6, 3, 0, 0}};
     }
 
     private void fillWithPossibilitiesWhenHasNoValue(Cell cell){
