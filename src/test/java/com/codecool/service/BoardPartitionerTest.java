@@ -79,7 +79,7 @@ class BoardPartitionerTest {
     void getBox(){
         Board testBoard = createCellBoard();
         int[] expectedCellsValues = {0,1,2,9,10,11,18,19,20};
-        Cell[] actualCells = BoardPartitioner.getBox(testBoard, 0);
+        Cell[] actualCells = BoardPartitioner.getBoxByCellId(testBoard, 0);
         int[] actualCellsValues = new int[9];
         for (int i = 0; i <actualCells.length; i++) {
             actualCellsValues[i] = actualCells[i].getValue();
@@ -93,7 +93,7 @@ class BoardPartitionerTest {
     void getMidBoxBox(){
         Board testBoard = testUtills.getBoard();
         int[] expectedCellsValues = {5,0,8,0,0,0,0,0,0};
-        Cell[] actualCells = BoardPartitioner.getBox(testBoard, 3);
+        Cell[] actualCells = BoardPartitioner.getBoxByCellId(testBoard, 3);
         int[] actualCellsValues = new int[9];
         for (int i = 0; i <actualCells.length; i++) {
             actualCellsValues[i] = actualCells[i].getValue();

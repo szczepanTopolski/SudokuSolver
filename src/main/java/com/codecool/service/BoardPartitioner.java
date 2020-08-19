@@ -33,14 +33,19 @@ public  class BoardPartitioner {
         return row;
     }
 
-    public static Cell[] getBox(Board board, int id){
+    public static Cell[] getBoxByCellId(Board board, int id){
         int idOfSquare = changeCellIdToSquareId(board.getCells()[id]);
+        return getBox(board, idOfSquare);
+    }
+
+
+    public static Cell[] getBox(Board board, int idOfSquare) {
         List<Cell> box = new ArrayList<Cell>();
-        int xOffset = 3 * (idOfSquare % 3 );
+        int xOffset = 3 * (idOfSquare % 3);
         int yOffset = 3 * (idOfSquare / 3);
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 3; x++) {
-                box.add(getCell(board,x + xOffset, y + yOffset));
+                box.add(getCell(board, x + xOffset, y + yOffset));
             }
         }
         return box.toArray(new Cell[0]);
