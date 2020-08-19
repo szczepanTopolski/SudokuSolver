@@ -1,6 +1,7 @@
 package com.codecool.service;
 
 import com.codecool.model.Board;
+import com.codecool.service.TestUtills.State;
 import org.junit.jupiter.api.Test;
 
 import static com.codecool.service.CompletenessValidator.*;
@@ -17,7 +18,7 @@ class CompletenessValidatorTest {
     @Test
     public void shouldReturnTrueWhenSudokuIsSolved() {
         // Arrange
-        Board board = testUtills.getBoard(true);
+        Board board = testUtills.getBoard(State.SOLVED);
         // Act
         // Assert
         assertTrue(isFullFilledWithValues()
@@ -30,7 +31,20 @@ class CompletenessValidatorTest {
     @Test
     public void shouldReturnFalseWhenSudokuIsNotSolved() {
         // Arrange
-        Board board = testUtills.getBoard(false);
+        Board board = testUtills.getBoard(State.VALID);
+        // Act
+        // Assert
+        assertFalse(isFullFilledWithValues()
+                .and(areBoxesValid())
+                .and(areColsValid())
+                .and(areRowsValid())
+                .apply(board));
+    }
+
+    @Test
+    public void shouldReturnFalseWhenSudokuIsNotValid() {
+        // Arrange
+        Board board = testUtills.getBoard(State.INVALID);
         // Act
         // Assert
         assertFalse(isFullFilledWithValues()
