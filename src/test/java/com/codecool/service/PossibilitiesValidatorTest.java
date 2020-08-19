@@ -18,9 +18,11 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 class PossibilitiesValidatorTest {
 
     private final PossibilitiesValidator possibilitiesValidator;
+    private final  TestUtills testUtills;
 
     PossibilitiesValidatorTest() {
         this.possibilitiesValidator = new PossibilitiesValidator();
+        testUtills = new TestUtills();
     }
 
     @ParameterizedTest
@@ -34,6 +36,17 @@ class PossibilitiesValidatorTest {
         assertEquals(expected.toString(), actual.toString());
     }
 
+
+    @Test
+    public void shouldRemovePossibilitiesFromCellWhenItsValuesFound() {
+        // Arrange
+        Board board = testUtills.getBoard();
+        Cell cellToValidate = board.getCells()[1];
+        // Act
+        possibilitiesValidator.validatePossibilities(board, cellToValidate);
+        // Assert
+        assertEquals(new HashSet<>(Arrays.asList(1,9)), cellToValidate.getPossibilities());
+    }
 
     private static Stream<Arguments> possibilitiesProvider() {
         return Stream.of(arguments(getCell(),
