@@ -6,19 +6,19 @@ import com.codecool.model.Cell;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Stream;
+
+import static com.codecool.service.Properties.MAX_HEIGHT;
+import static com.codecool.service.Properties.MAX_WIDTH;
 
 public class ConverterCSV implements Converter{
 
     @Override
     public Board convert(String[][] values) throws IllegalArgumentException{
-        final int MAX_HEIGHT = 9;
-        final int MAX_WIDTH = 9;
-        Cell[] cells = new Cell[MAX_HEIGHT * MAX_WIDTH];
-        for (int i = 0; i < MAX_HEIGHT; i++) {
-            for (int j = 0; j < MAX_WIDTH; j++) {
+        Cell[] cells = new Cell[MAX_HEIGHT.getValue() * MAX_WIDTH.getValue()];
+        for (int i = 0; i < MAX_HEIGHT.getValue(); i++) {
+            for (int j = 0; j < MAX_WIDTH.getValue(); j++) {
                 int value = Integer.parseInt(values[i][j]);
-                int id = i + j * MAX_WIDTH;
+                int id = i + j * MAX_WIDTH.getValue();
                 cells[id] = new Cell(id, i, j, value);
                 Cell cell = cells[id];
                 fillPossibilitiesWhenHasNoValue(value, cell);
