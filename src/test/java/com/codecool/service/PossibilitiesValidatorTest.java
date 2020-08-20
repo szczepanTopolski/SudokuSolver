@@ -18,11 +18,9 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class PossibilitiesValidatorTest {
 
-    private final PossibilitiesValidator possibilitiesValidator;
     private final  TestUtills testUtills;
 
     PossibilitiesValidatorTest() {
-        this.possibilitiesValidator = new PossibilitiesValidator();
         testUtills = new TestUtills();
     }
 
@@ -31,7 +29,7 @@ class PossibilitiesValidatorTest {
     public void shouldRemovePossibilityValueWhenFoundAnother(Cell cell, Cell[] cells, Set<Integer> expected) {
         // Arrange
         // Act
-        possibilitiesValidator.removeDuplicatedPossibilities(cell, cells);
+        PossibilitiesValidator.removeDuplicatedPossibilities(cell, cells);
         Set<Integer> actual = cell.getPossibilities();
         // Assert
         assertEquals(expected.toString(), actual.toString());
@@ -44,7 +42,7 @@ class PossibilitiesValidatorTest {
         Board board = testUtills.getBoard(State.VALID);
         Cell cellToValidate = board.getCells()[1];
         // Act
-        possibilitiesValidator.validatePossibilities(board, cellToValidate);
+        PossibilitiesValidator.validatePossibilities(board, cellToValidate);
         // Assert
         assertEquals(new HashSet<>(Arrays.asList(1,9)), cellToValidate.getPossibilities());
     }
