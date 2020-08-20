@@ -2,12 +2,12 @@ package com.codecool.service;
 
 import com.codecool.model.Board;
 import com.codecool.model.Cell;
-import org.junit.jupiter.api.BeforeAll;
+import com.codecool.service.TestUtills.State;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class BoardPartitionerTest {
 
@@ -36,7 +36,7 @@ class BoardPartitionerTest {
     @Test
     @DisplayName("get mid column")
     void getMidColumn() {
-        Board testBoard = testUtills.getBoard();
+        Board testBoard = testUtills.getBoard(State.VALID);
         int[] expectedCellsValues = {0,0,0,1,6,9,0,0,0};
         Cell[] actualCells = BoardPartitioner.getColumn(testBoard, 4);
         int[] actualCellsValues = new int[9];
@@ -64,7 +64,7 @@ class BoardPartitionerTest {
     @Test
     @DisplayName("get mid row")
     void getRowInTheMiddle(){
-        Board testBoard = testUtills.getBoard();
+        Board testBoard = testUtills.getBoard(State.VALID);
         int[] expectedCellsValues = {9,0,0,8,6,3,0,0,5};
         Cell[] actualCells = BoardPartitioner.getRow(testBoard, 4);
         int[] actualCellsValues = new int[9];
@@ -91,7 +91,7 @@ class BoardPartitionerTest {
     @Test
     @DisplayName("get box In the middle")
     void getMidBoxBox(){
-        Board testBoard = testUtills.getBoard();
+        Board testBoard = testUtills.getBoard(State.VALID);
         int[] expectedCellsValues = {5,0,8,0,0,0,0,0,0};
         Cell[] actualCells = BoardPartitioner.getBoxByCellId(testBoard, 3);
         int[] actualCellsValues = new int[9];
