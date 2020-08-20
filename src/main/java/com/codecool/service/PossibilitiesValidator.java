@@ -13,29 +13,31 @@ import static com.codecool.service.BoardPartitioner.*;
 
 public class PossibilitiesValidator {
 
-    public void validatePossibilities(Board board, Cell cell){ //GET BOX ID!!
+    public static void validatePossibilities(Board board, Cell cell){
         removeDuplicatedPossibilities(cell, getBoxByCellId(board, cell.getId()));
         removeDuplicatedPossibilities(cell, getColumn(board, cell.getX()));
         removeDuplicatedPossibilities(cell, getRow(board, cell.getY()));
     }
 
-    void removeDuplicatedPossibilities(Cell cellToValidate, Cell[] box) {
+    static void removeDuplicatedPossibilities(Cell cellToValidate, Cell[] box) {
         Arrays.stream(box)
                 .map(Cell::getValue)
                 .filter(cell->cell > 0)
                 .forEach(cellToValidate::removePossibility);
     }
 
-    public boolean countPossibilities(Cell[] cells){
+    public static boolean countPossibilities(Cell[] cells){
         Map<Integer, Integer> occurrences = new HashMap<>();
-        Arrays.stream(cells)
+        List<Cell> emptyCells = Arrays.stream(cells)
                 .filter(cell -> cell.getValue() == 0)
+                .collect(Collectors.toList());
+        emptyCells.stream()
                 .flatMap(cell -> cell.getPossibilities().stream())
                 .forEach(value->occurrences.merge(value,1,Integer::sum));
-        return updateCells(cells, occurrences);
+        return updateCells(emptyCells, occurrences);
     }
 
-    private boolean updateCells(Cell[] cells, Map<Integer,Integer> occurrences) {
+    private static boolean updateCells(List<Cell> cells, Map<Integer,Integer> occurrences) {
         List<Integer> values = occurrences.entrySet().stream().filter(k-> k.getValue() == 1)
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
