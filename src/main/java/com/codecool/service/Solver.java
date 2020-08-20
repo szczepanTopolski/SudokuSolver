@@ -10,12 +10,10 @@ import static com.codecool.service.CompletenessValidator.*;
 
 public class Solver {
     private final Board board;
-    private final PossibilitiesValidator validator;
     private boolean isCyclePossible;
 
-    public Solver(Board board, PossibilitiesValidator validator) {
+    public Solver(Board board) {
         this.board = board;
-        this.validator = validator;
         this.isCyclePossible = true;
     }
 
@@ -49,12 +47,16 @@ public class Solver {
     }
 
     private boolean isSuccessfullyUpdated(BiFunction<Board, Integer, Cell[]> boardPartitioner, int i) {
-        return validator.countPossibilities(boardPartitioner.apply(board, i));
+        return PossibilitiesValidator.countPossibilities(boardPartitioner.apply(board, i));
     }
 
     private void fillWithPossibilities() {
         Arrays.stream(board.getCells())
                 .filter(cell -> cell.getValue() == 0)
-                .forEach(cell -> validator.validatePossibilities(board, cell));
+                .forEach(cell -> PossibilitiesValidator.validatePossibilities(board, cell));
+    }
+
+    public Board getBoard() {
+        return board;
     }
 }
