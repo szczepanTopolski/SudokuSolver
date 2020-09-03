@@ -39,7 +39,7 @@ public class ConverterCSV implements Converter<Board> {
 
     private String[][] retrieveValuesFromString(String string) {
         return Arrays.stream(string.split("\n"))
-                .map(row -> Arrays.stream(row.split(";"))
+                .map(row -> Arrays.stream(row.replaceAll(" ","").split(";"))
                         .toArray(String[]::new))
                 .toArray(String[][]::new);
     }
