@@ -1,13 +1,14 @@
 package com.codecool.controller;
 
+import com.codecool.FxControllers.RootSceneController;
 import com.codecool.exception.InvalidSudokuException;
 import com.codecool.model.Board;
 import com.codecool.model.Cell;
 import com.codecool.service.Solver;
+import com.codecool.view.ButtonsController;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.BlockingQueue;
 import java.util.stream.Collectors;
 
 import static com.codecool.service.Properties.MAX_HEIGHT;
@@ -17,10 +18,16 @@ public class SolverController implements Runnable{
 
     private final Solver solver;
     private static int threadCounter = 0;
+    public static RootSceneController listener;
+    long startTimer;
 
 
+    public  void setListener(RootSceneController rootController) {
+        listener = rootController;
+    }
     public SolverController(Solver solver) {
         this.solver = solver;
+        startTimer = System.currentTimeMillis();
     }
 
 
@@ -34,16 +41,22 @@ public class SolverController implements Runnable{
         boolean isSolved = solver.solve();
 
         if(isSolved){
-            //TODO Notify and display jfx gui
-            synchronized (SolverController.class) {
-                System.out.println("ITS SOLVED!!");
-                System.out.println("Threads used: " + threadCounter);
-                for (int i = 0; i < 81; i++) {
-                    if (i % 9 == 0)
-                        System.out.println("");
-                    System.out.print(solver.getBoard().getCells()[i].getValue() + " ,");
-                }
-            }
+
+//            synchronized (SolverController.class){
+//                System.out.println("ITS SOLVED!!");
+//                System.out.println("Threads used: " + threadCounter);
+//                for (int i = 0; i < 81; i++) {
+//                    if (i % 9 == 0)
+//                        System.out.println("");
+//                    System.out.print(solver.getBoard().getCells()[i].getValue() + " ,");
+//
+//                }
+//            }
+
+            double timeSolved = System.currentTimeMillis() - startTimer;
+            listener.notifySolution(solver.getBoard(), threadCounter, timeSolved);
+
+
         }else{
             try {
                 splitThreads();
